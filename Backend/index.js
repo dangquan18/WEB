@@ -3,8 +3,7 @@ const cors = require("cors");
 const roomRoutes = require("./routes/roomRoutes");
 const db = require("./config/database");
 const session = require("express-session");
-const MySQLStore = require("express-mysql-session")(session);
-const sessionStore = new MySQLStore({}, db);
+const MemoryStore = require("memorystore")(session);
 const bodyParser = require("body-parser");
 const app = express();
 const dotenv = require("dotenv");
@@ -20,7 +19,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 app.use(
   session({
-    store: sessionStore,
+    store: new MemoryStore(),
     secret: "secret_key",
     resave: false,
     saveUninitialized: true,
