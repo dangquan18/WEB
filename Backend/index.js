@@ -4,8 +4,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const db = require("./config/database");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const sessionStore = new MySQLStore({}, connection);
-
+const sessionStore = new MySQLStore({}, db);
 const bodyParser = require("body-parser");
 const app = express();
 const dotenv = require("dotenv");
